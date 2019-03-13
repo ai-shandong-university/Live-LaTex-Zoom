@@ -1,4 +1,4 @@
-# Live Coding Zoom
+# Live LaTex Zoom
 
 ![build](https://img.shields.io/appveyor/ci/ai-shandong-university/live-coding-zoom.svg?style=flat-square) ![LICENSE](https://img.shields.io/github/license/ai-shandong-university/live-coding-zoom.svg?style=flat-square) ![docker](https://img.shields.io/docker/automated/ai-shandong-university/live-coding-zoom.svg?style=flat-square)
 
