@@ -1,4 +1,4 @@
-tornado==3.2.1
+tornado
 json5
 pymongo
 
