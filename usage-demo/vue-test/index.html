@@ -12,10 +12,10 @@
     </div>
 
     <div id="app-2">
-      <span v-bind:title='message'>鼠标悬停此处可见提示信息</span>
+      <span :title='message'>鼠标悬停此处可见提示信息</span>
     </div>
 
-    <div id="app3">
+    <div id="app-3">
       Now I can be seen!
     </div>
 
@@ -27,16 +27,143 @@
 
     <div id="app-5">
       <p>{{ message }}</p>
-      <button v-on:click="reverseMessage">逆转语句</button>
+      <button @click="reverseMessage">逆转语句</button>
     </div>
 
     <div id="app-6">
       <p>{{ message }}</p>
       <input v-model="message">
     </div>
-    
-  </body>
 
+    <div id="app-7">
+      <form @submit.prevent="addNewTodo">
+        <label for="new-todo">Add a todo</label>
+        <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed Email">
+        <button>Add</button>
+      </form>
+      <!--
+      为每个 todo-item 提供 todo 对象
+      todo 对象是变量，即其内容可以是动态的。
+      也需要为每个组件提供一个“key”
+       -->
+       <ul>
+          <li 
+            is="todo-item"
+            v-for="(item, index) in todos"
+            v-bind:title="item.text"
+            v-bind:key="item.id"
+            @remove="todos.splice(index, 1)"
+          ></li>
+       </ul>
+        
+        <p>{{ visitCount }}</p>
+        <button @click="visitCount += 1">Click me!</button>
+    </div>
+    
+    <div id="example">
+      <p>The super start: {{ name }}</p>
+    </div>
+
+    <div id="app-8">
+      <p>Using mustaches: {{ raw_message }}</p>
+      <p>Using v-html mustache: <span v-html="raw_message"></span></p>
+
+      <p>The JS script is available in the template {{message + 'Woo!'}}</p>
+    </div>
+
+    <div id="app-9">
+      <p>The Origin string: {{ message }}</p>
+      <p>The computed: {{ reverseMessage }}</p> <!--作为一个属性使用-->
+      <p>Let's introduce {{ fullName }}</p>
+      <p>Now changed, {{ firstName='Kobe' }} {{lastName='bryant'}} {{fullName}}</p>
+      <p>{{fullName = 'James Hordan'}}</p>
+    </div>
+    
+    <div id="watch-example">
+      <p>Ask a yes/no question
+      <input v-model="question"></p>
+      <p>{{ answer }}</p>
+    </div>
+
+    <div id="app-10">
+      <p :style="{ color: activeColor, fontSize: fontSize}">直接的样式绑定</p>
+      <p :style="styleObj">对象样式绑定</p>
+      <p v-if="awesome">Vue is awesome!</p>
+      <p v-else>Vue is not pretty enough..</p>
+    </div>
+
+    <div id="tem-1">
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder=" Enter your username" key="username">
+      </template>
+
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email" key="email">
+      </template>
+
+      <p><button @click="changed">Change</button></p>
+    </div>
+
+    <ul id="fav">
+      <li v-for="(value, key, index) in star">
+        Mes: {{ index }} - {{ key }} - {{value}}
+      </li>
+
+      <p><button @click="{{star.age += 1}}">After one year</button></p>
+      <p>
+        <button @click="addOne">New child</button>
+        <button @click="reset">Reset</button>
+      </p>
+    </ul>
+
+  </body>
+  
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="test.js" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+  <script charset="utf-8"> 
+    var watchExampleVM = new Vue({
+      el: '#watch-example',
+      data: {
+        question: '',
+        answer: 'I cannot give you an answer until you ask a question!'
+     },
+    watch: {
+      // 如果 `question` 发生改变，这个函数就会运行
+      question: function (newQuestion, oldQuestion) {
+        this.answer = 'Waiting for you to stop typing...'
+        this.debouncedGetAnswer()
+      }
+   },
+    created: function () {
+    // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+    // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+    // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+    // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+    // 请参考：https://lodash.com/docs#debounce
+    this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+    },
+   methods: {
+    getAnswer: function () {
+      if (this.question.indexOf('?') === -1) {
+        this.answer = 'Questions usually contain a question mark. ;-)'
+        return
+      }
+      this.answer = 'Thinking...'
+      var vm = this
+      axios.get('https://yesno.wtf/api')
+        .then(function (response) {
+          vm.answer = _.capitalize(response.data.answer)
+        })
+        .catch(function (error) {
+          vm.answer = 'Error! Could not reach the API. ' + error
+          })
+      }
+    }
+  })
+  </script>
 </html>
