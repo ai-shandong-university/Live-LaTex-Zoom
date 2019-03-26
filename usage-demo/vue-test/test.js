@@ -62,7 +62,7 @@ var app6 = new Vue({
 Vue.component('todo-item', {
   // 使用 props 定义自定义属性
   props: ['title'],   
-  template: '<li>{{ title }}<button v-on:click="$emit(\'remove\')">Remove</button></li>'
+  template: '<li>{{ title }}<button v-on:click="$emit(\'remove\')">Remove</button> </li>'
 });
 
 var app7 = new Vue({
@@ -87,7 +87,7 @@ var app7 = new Vue({
     addNewTodo: function() {
       this.todos.push({
         id: this.nextTodoId ++,
-        title: this.newTodoText
+        text: this.newTodoText
       });
       this.newTodoText = '';
     }
