@@ -117,6 +117,23 @@
         <button @click="reset">Reset</button>
       </p>
     </ul>
+    
+    <div id="blog-post-1">
+      <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post 
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+          v-on:enlarge-text="postFontSize += $event"
+        ></blog-post>
+      </div>
+    </div>
+     <div id="my-input">
+       <p><my-input v-model="message"></my-input></p>
+      <p>{{ message }}</p>
+     </div>
+
+     <alert-box>Something goes wrong...</alert-box>
 
   </body>
   

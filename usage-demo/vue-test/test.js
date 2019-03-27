@@ -274,3 +274,83 @@ var favVm = new Vue({
 });
 
 // 定义组件中使用 v-for 指令时,需要明确key
+
+
+
+// 组件基础:
+// 组件是可以复用的 Vue 实例,所以他们与`new Vue`接受相同的
+// 选项,例如: data, computed, watch, methods, 生命周期函数
+// 但是不具有 el 
+//
+// 需要注意的是组件的 data属性,需要一个函数,而不是一个对象
+// 只有这样在复用时才可以返回一个独立维护的对象
+//
+
+// 全局注册组件
+// 通过使用单个的 post 对象作为props参数,可以减少参数数量
+// 为了通过一个按钮控制所有的字体大小,需要在模板中将自定义组件
+// 绑定到一个事件上,然后在组件定义中使用 $emit 函数来通知父组件
+// 发生的事件
+Vue.component('blog-post', {
+  props: ['post'],
+  template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+      <button v-on:click="$emit('enlarge-text', 0.1)">Enlarge text</button>
+      <div v-html="post.content"></div>
+    </div>
+  `
+});
+
+var bolg1 = new Vue({
+  el: '#blog-post-1',
+  data: {
+    posts: [
+      {
+        id: 1, 
+        title: 'Vue sounds like a great tool', 
+        content: 'Let\'s have some fun with that great tool,\n it gona be funny...'
+      },
+      {
+        id: 2,
+        title: 'Why are u so tired?',
+        content: 'More inspire things are needed, you know it'
+      },
+      {
+        id: 3,
+        title: 'Never settle down with Vue',
+        content: 'You will find what you want'
+      }
+    ],
+    postFontSize: 1,
+  }
+});
+
+
+// 自定义组件绑定数据 使用v-mode
+Vue.component('my-input', {
+  props: ['value'],
+  template: `
+    <input 
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+    />   
+  `
+});
+
+var myInput = new Vue({
+  el: '#my-input',
+  data: {
+    message: 'Please enter...'
+  }
+});
+
+// slot operations
+Vue.component('alert-box', {
+  template: `
+    <div class="demo-alert-box">
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+  `
+});
