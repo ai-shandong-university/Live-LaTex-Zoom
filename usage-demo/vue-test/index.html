@@ -134,11 +134,26 @@
      </div>
 
      <alert-box>Something goes wrong...</alert-box>
+     <div id="dynamic-component-demo" class="demo">
+      <button
+        v-for="tab in tabs"
+        v-bind:key="tab.name"
+        v-bind:class="['tab-button', { active: currentTab.name === tab.name }]"
+        v-on:click="currentTab = tab"
+      >{{ tab.name }}</button>
+
+      <component
+        v-bind:is="currentTab.component"
+        class="tab"
+      ></component>
+    </div>
 
   </body>
   
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="test.js" charset="utf-8"></script>
+  <script src="dynamic.js"></script>
+  <script scr="basic.css"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 
