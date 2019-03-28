@@ -1,4 +1,4 @@
-Live LaTex front-end set up
+# Live LaTex front-end set up
 
 ## Project setup
 ```
