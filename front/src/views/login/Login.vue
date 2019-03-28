@@ -2,8 +2,7 @@
   <div class="login">
     <div class="login-form">
       <div class="login-header">
-        <img src="../../assets/images/logo.svg" width="100" height="100" alt="">
-        <p>{{ $Config.siteName }}</p>
+        <img src="../../assets/images/logo.png" width="130" height="130" alt="">
       </div>
       <el-input
           placeholder="请输入用户名"
@@ -59,7 +58,7 @@
           setToken('123456789');
           this.$notify({
             title: '登录成功',
-            message: '很高兴你使用ElementUIAdmin！别忘了给个Star哦。',
+            message: '欢迎使用Live LaTex Zoom, 您可以在GitHub上进行 star 哦! ',
             type: 'success'
           });
           this.loginLoading = false;

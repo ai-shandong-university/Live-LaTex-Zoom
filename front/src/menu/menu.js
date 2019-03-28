@@ -16,19 +16,19 @@ menu.home = {
  * @type {{name: string, icon: string, children: {}}}
  */
 menu.font_icon = {
-  name: '字体图标',
+  name: '新建',
   icon: 'fa fa-th',
   children: {}
 };
 let icon = menu.font_icon.children;
 
 icon.font_awesome = {
-  name: 'FontAwesome 4.7',
+  name: '文本',
   path: '/font_awesome',
 
 };
 icon.element_icon = {
-  name: 'ElementIcon',
+  name: '文件夹',
   path: '/element_icon',
 };
 
@@ -37,22 +37,26 @@ icon.element_icon = {
  * @type {{name: string, icon: string, children: {}}}
  */
 menu.content_manage = {
-  name: '内容管理',
+  name: '下载',
   icon: 'fa fa-file-text-o',
   children: {}
 };
 
 let ContentManage = menu.content_manage.children;
 
-ContentManage.post = {
-  name: '文章管理',
+ContentManage.source = {
+  name: '源码',
   path: '/post_manage',
 };
 
+ContentManage.pdf = {
+  name: 'pdf',
+  path: '/post_manage',
+}
 /**
  * 用户管理
  * @type {{name: string, icon: string, children: {}}}
- */
+ *
 menu.user_manage = {
   name: '用户管理',
   icon: 'fa fa-user-circle-o',
@@ -63,7 +67,7 @@ let UserManage = menu.user_manage.children;
 UserManage.user = {
   name: '用户列表',
   path: '/user_manage',
-};
+};*/
 
 
 /**
@@ -71,28 +75,28 @@ UserManage.user = {
  * @type {{name: string, icon: string, children: {}}}
  */
 menu.category_manage = {
-  name: '分类管理',
+  name: '同步管理',
   icon: 'fa fa-sitemap',
   children: {}
 };
 let CategoryManage = menu.category_manage.children;
 
 CategoryManage.category = {
-  name: '分类列表',
+  name: 'GitHub',
   path: '/category_manage',
 };
 
 
 
 menu.permission_manage = {
-  name: '权限管理',
+  name: '用户组',
   icon: 'fa fa-qrcode',
   children: {}
 };
 let PermissionManage = menu.permission_manage.children;
 
 PermissionManage.role = {
-  name: '角色管理',
+  name: '成员管理',
   path: '/role_manage',
 };
 
@@ -106,16 +110,44 @@ export default menu;
 if(process.env.NODE_ENV=='development'){
 
   menu.development_tools = {
-    name: '开发工具',
+    name: '设置',
     icon: 'fa fa-wrench',
     children: {}
   };
 
   let DevelopmentTools = menu.development_tools.children;
 
-  DevelopmentTools.code = {
-    name: '构建代码',
+  DevelopmentTools.engin = {
+    name: '编译引擎',
     path: '/build_code',
   };
+
+  DevelopmentTools.main_tex = {
+    name: '主文档',
+    path: '',
+  };
+
+  DevelopmentTools.spell = {
+    name: '拼写检查',
+    path: '',
+  };
+
+  DevelopmentTools.complete = {
+    name: '自动补全',
+    path: '',
+  };
+
+  DevelopmentTools.theme = {
+    name: '主题',
+  };
+
+  DevelopmentTools.font = {
+    name: '字体设置',
+  };
+  
+  DevelopmentTools.count = {
+    name: '字数统计',
+  };
+
 
 }
