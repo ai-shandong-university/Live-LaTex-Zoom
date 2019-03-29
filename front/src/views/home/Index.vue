@@ -2,7 +2,7 @@
   <div>
     <el-card style="border-radius: 0">
       <div slot="header">
-        <span>概况</span>
+        <span>文件</span>
       </div>
       <div class="demo">
         <el-row :gutter="20">
